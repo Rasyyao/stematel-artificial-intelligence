@@ -96,7 +96,7 @@ export default function HomePage() {
   }, [])
 
   function handleDownload(dataset: Dataset) {
-    window.open(dataset.file_path, '_blank')
+    window.open(`/api/download/dataset/${dataset.id}`, '_blank')
   }
 
   const leaderboard = submissions.reduce<Record<string, number>>((acc, s) => {

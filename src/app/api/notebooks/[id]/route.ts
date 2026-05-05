@@ -19,8 +19,10 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
   if (error || !submission) return Response.json({ error: 'Not found' }, { status: 404 })
 
   try {
-    const res = await fetch(submission.file_path)
-    if (!res.ok) throw new Error('Blob fetch failed')
+    const res = await fetch(submission.file_path, {
+      headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` },
+    })
+    if (!res.ok) throw new Error(`Blob fetch failed: ${res.status}`)
     const content = await res.text()
     return new Response(content, {
       headers: {
@@ -28,7 +30,8 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
         'Content-Disposition': `attachment; filename="${submission.file_name}"`,
       },
     })
-  } catch {
-    return Response.json({ error: 'Failed to load notebook' }, { status: 500 })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Failed to load notebook'
+    return Response.json({ error: message }, { status: 500 })
   }
 }

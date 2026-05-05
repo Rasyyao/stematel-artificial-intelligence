@@ -5,7 +5,7 @@ import { put } from '@vercel/blob'
 export async function POST(request: NextRequest) {
   if (!process.env.BLOB_READ_WRITE_TOKEN) {
     return Response.json(
-      { error: 'BLOB_READ_WRITE_TOKEN is not configured. Add it to your environment variables.' },
+      { error: 'BLOB_READ_WRITE_TOKEN is not configured.' },
       { status: 500 },
     )
   }
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     const pathname = `${type}/${Date.now()}_${safeName}`
 
     const blob = await put(pathname, file, {
-      access: 'public',
+      access: 'private',
       multipart: true,
     })
 
