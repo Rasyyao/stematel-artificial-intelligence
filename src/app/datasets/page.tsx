@@ -75,7 +75,7 @@ export default function DatasetsPage() {
             className="group flex flex-col bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
           >
             <div className="flex justify-between items-start mb-4">
-              <Badge variant="secondary" className="bg-[#BF2026]/10 text-[#BF2026] hover:bg-[#BF2026]/20">
+              <Badge variant="default" className="bg-[#BF2026]/10 text-[#BF2026] hover:bg-[#BF2026]/20">
                 {dataset.category}
               </Badge>
               <span className="text-xs text-gray-400 font-medium">{formatDate(dataset.created_at)}</span>
