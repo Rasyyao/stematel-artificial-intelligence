@@ -40,10 +40,10 @@ function normalizeOutput(text?: string | string[]): string {
 function CodeCell({ cell }: { cell: NotebookCell; index: number }) {
   const source = normalizeSource(cell.source)
   return (
-    <div className="rounded-xl overflow-hidden border border-white/8 mb-4">
-      <div className="flex items-center gap-2 px-4 py-2 bg-white/3 border-b border-white/8">
-        <span className="text-[10px] font-mono text-white/30">In [{cell.execution_count ?? ' '}]</span>
-        <span className="text-[10px] text-white/20">Python</span>
+    <div className="rounded-xl overflow-hidden border border-gray-200 mb-4">
+      <div className="flex items-center gap-2 px-4 py-2 bg-white/3 border-b border-gray-200">
+        <span className="text-[10px] font-mono text-gray-400">In [{cell.execution_count ?? ' '}]</span>
+        <span className="text-[10px] text-gray-300">Python</span>
       </div>
       <SyntaxHighlighter
         language="python"
@@ -54,7 +54,7 @@ function CodeCell({ cell }: { cell: NotebookCell; index: number }) {
         {source || ''}
       </SyntaxHighlighter>
       {cell.outputs && cell.outputs.length > 0 && (
-        <div className="bg-black/20 border-t border-white/8">
+        <div className="bg-black/20 border-t border-gray-200">
           {cell.outputs.map((output, i) => (
             <OutputRenderer key={i} output={output} />
           ))}
@@ -112,14 +112,14 @@ function OutputRenderer({ output }: { output: NotebookOutput }) {
 function MarkdownCell({ cell }: { cell: NotebookCell }) {
   const source = normalizeSource(cell.source)
   return (
-    <div className="mb-4 px-6 py-4 prose prose-invert max-w-none prose-headings:text-white prose-p:text-white/70 prose-code:text-violet-300 prose-pre:bg-black/40 prose-strong:text-white">
+    <div className="mb-4 px-6 py-4 prose prose-invert max-w-none prose-headings:text-white prose-p:text-white/70 prose-code:text-red-300 prose-pre:bg-white prose-strong:text-white">
       <ReactMarkdown
         components={{
           code({ className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '')
             const isInline = !match
             return isInline ? (
-              <code className="bg-white/10 px-1.5 py-0.5 rounded text-violet-300 text-[13px] font-mono" {...props}>
+              <code className="bg-gray-100 px-1.5 py-0.5 rounded text-red-300 text-[13px] font-mono" {...props}>
                 {children}
               </code>
             ) : (
@@ -148,11 +148,11 @@ export default function NotebookViewer({ content }: { content: string }) {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-6 px-4 py-3 rounded-xl border border-white/8 bg-white/3 flex items-center gap-3">
+      <div className="mb-6 px-4 py-3 rounded-xl border border-gray-200 bg-white/3 flex items-center gap-3">
         <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-        <span className="text-sm text-white/50">Kernel: {kernelName}</span>
-        <span className="text-white/20">·</span>
-        <span className="text-sm text-white/50">{notebook.cells.length} cells</span>
+        <span className="text-sm text-gray-500">Kernel: {kernelName}</span>
+        <span className="text-gray-300">·</span>
+        <span className="text-sm text-gray-500">{notebook.cells.length} cells</span>
       </div>
       <div className="space-y-1">
         {notebook.cells.map((cell, index) => {

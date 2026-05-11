@@ -105,7 +105,7 @@ export default function SubmitPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4">
+      <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -115,7 +115,7 @@ export default function SubmitPage() {
             <Check className="w-10 h-10 text-green-400" />
           </div>
           <h1 className="text-2xl font-bold mb-3">Submitted!</h1>
-          <p className="text-white/50 mb-8 leading-relaxed">
+          <p className="text-gray-500 mb-8 leading-relaxed">
             Your notebook has been uploaded. The admin team will review it soon.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -132,23 +132,23 @@ export default function SubmitPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-[#F5F5F5]">
       <Navbar />
 
       {/* Background effects */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-violet-600/6 rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-red-600/6 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative pt-24 pb-20 px-4">
         <div className="max-w-lg mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-            <Link href="/" className="inline-flex items-center gap-2 text-white/35 hover:text-white/60 text-sm transition-colors mb-6 group">
+            <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-600 text-sm transition-colors mb-6 group">
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
               Back to Home
             </Link>
             <h1 className="text-3xl font-bold mb-2">Submit Notebook</h1>
-            <p className="text-white/45">Upload your .ipynb file for review</p>
+            <p className="text-gray-500">Upload your .ipynb file for review</p>
           </motion.div>
 
           <motion.form
@@ -158,9 +158,9 @@ export default function SubmitPage() {
             onSubmit={handleSubmit}
             className="space-y-5"
           >
-            <div className="glass rounded-2xl p-6 space-y-5 border border-white/6">
+            <div className="glass rounded-2xl p-6 space-y-5 border border-gray-200">
               <div className="space-y-2">
-                <Label htmlFor="name">Your Name *</Label>
+                <Label htmlFor="name" className='text-black'>Your Name *</Label>
                 <Input
                   id="name"
                   placeholder="e.g. Ahmad Fauzi"
@@ -171,7 +171,7 @@ export default function SubmitPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="title">Submission Title *</Label>
+                <Label htmlFor="title" className='text-black'>Submission Title *</Label>
                 <Input
                   id="title"
                   placeholder="e.g. Image Classification with ResNet50"
@@ -182,7 +182,7 @@ export default function SubmitPage() {
               </div>
 
               <div className="space-y-2">
-                <Label>Dataset Used <span className="text-white/30 font-normal">(optional)</span></Label>
+                <Label className='text-black'>Dataset Used <span className="text-gray-400 font-normal">(optional)</span></Label>
                 <Select value={form.dataset_id} onValueChange={v => setForm(f => ({ ...f, dataset_id: v }))}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a dataset" />
@@ -196,7 +196,7 @@ export default function SubmitPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="notes">Notes <span className="text-white/30 font-normal">(optional)</span></Label>
+                <Label htmlFor="notes" className='text-black'>Notes <span className="text-gray-400 font-normal">(optional)</span></Label>
                 <Textarea
                   id="notes"
                   placeholder="What approach did you try? Any questions or notes for the reviewer?"
@@ -209,15 +209,15 @@ export default function SubmitPage() {
 
             {/* Dropzone */}
             <div className="space-y-2">
-              <Label>Notebook File (.ipynb) *</Label>
+              <Label className='text-black'>Notebook File (.ipynb) *</Label>
               <div
                 {...getRootProps()}
                 className={`relative border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-200 ${
                   isDragActive
-                    ? 'border-violet-500 bg-violet-500/5'
+                    ? 'border-[#BF2026] bg-[#BF2026]/5'
                     : file
-                    ? 'border-green-500/40 bg-green-500/[0.03]'
-                    : 'border-white/10 hover:border-violet-500/30 hover:bg-white/[0.01]'
+                    ? 'border-green-500/40 bg-green-50'
+                    : 'border-gray-200 hover:border-[#BF2026]/30 hover:bg-gray-50'
                 }`}
               >
                 <input {...getInputProps()} />
@@ -235,23 +235,23 @@ export default function SubmitPage() {
                       </div>
                       <div className="text-left">
                         <div className="font-medium text-sm text-green-400 max-w-[200px] truncate">{file.name}</div>
-                        <div className="text-xs text-white/35">{formatBytes(file.size)}</div>
+                        <div className="text-xs text-gray-400">{formatBytes(file.size)}</div>
                       </div>
                       <button
                         type="button"
                         onClick={e => { e.stopPropagation(); setFile(null) }}
-                        className="ml-1 p-1.5 rounded-lg hover:bg-white/10 text-white/30 hover:text-white transition-colors"
+                        className="ml-1 p-1.5 rounded-lg hover:bg-gray-200 text-gray-400 hover:text-gray-600 transition-colors"
                       >
                         <X className="w-4 h-4" />
                       </button>
                     </motion.div>
                   ) : (
                     <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                      <Upload className={`w-8 h-8 mx-auto mb-3 ${isDragActive ? 'text-violet-400' : 'text-white/20'}`} />
-                      <p className="text-sm text-white/45 font-medium">
+                      <Upload className={`w-8 h-8 mx-auto mb-3 ${isDragActive ? 'text-[#BF2026]' : 'text-gray-400'}`} />
+                      <p className="text-sm text-gray-500 font-medium">
                         {isDragActive ? 'Drop your notebook here' : 'Drag & drop .ipynb file'}
                       </p>
-                      <p className="text-xs text-white/25 mt-1">or click to browse</p>
+                      <p className="text-xs text-gray-400 mt-1">or click to browse</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -260,7 +260,7 @@ export default function SubmitPage() {
 
             {uploading && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-2">
-                <div className="flex justify-between text-xs text-white/40">
+                <div className="flex justify-between text-xs text-gray-500">
                   <span>Uploading notebook...</span>
                   <span>{uploadProgress}%</span>
                 </div>

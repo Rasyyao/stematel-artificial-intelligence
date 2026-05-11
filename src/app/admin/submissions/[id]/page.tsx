@@ -15,17 +15,17 @@ import { ArrowLeft, Download, FileText, User, Calendar, Database, MessageSquare,
 import type { Submission, Review } from '@/lib/types'
 
 const STATUS_OPTIONS = [
-  { value: 'pending', label: 'Pending', color: 'text-yellow-400' },
-  { value: 'reviewed', label: 'Reviewed', color: 'text-blue-400' },
-  { value: 'good', label: 'Good ✓', color: 'text-green-400' },
-  { value: 'needs_improvement', label: 'Needs Improvement', color: 'text-orange-400' },
+  { value: 'pending', label: 'Pending', color: 'text-yellow-700' },
+  { value: 'reviewed', label: 'Reviewed', color: 'text-blue-700' },
+  { value: 'good', label: 'Good ✓', color: 'text-green-700' },
+  { value: 'needs_improvement', label: 'Needs Improvement', color: 'text-orange-700' },
 ]
 
 const statusBadge: Record<string, string> = {
-  pending: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
-  reviewed: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  good: 'bg-green-500/10 text-green-400 border-green-500/20',
-  needs_improvement: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
+  pending: 'bg-yellow-50 text-yellow-700 border-yellow-200',
+  reviewed: 'bg-blue-50 text-blue-700 border-blue-200',
+  good: 'bg-green-50 text-green-700 border-green-200',
+  needs_improvement: 'bg-orange-50 text-orange-700 border-orange-200',
 }
 
 type PageParams = { params: Promise<{ id: string }> }
@@ -105,14 +105,14 @@ export default function SubmissionDetailPage({ params }: PageParams) {
   if (loading) {
     return (
       <div className="p-8 flex items-center justify-center min-h-[50vh]">
-        <Loader2 className="w-6 h-6 animate-spin text-white/30" />
+        <Loader2 className="w-6 h-6 animate-spin text-gray-400" />
       </div>
     )
   }
 
   if (!submission) {
     return (
-      <div className="p-8 text-center text-white/40">
+      <div className="p-8 text-center text-gray-500">
         <p>Submission not found.</p>
         <Link href="/admin/submissions"><Button variant="outline" className="mt-4">Back to list</Button></Link>
       </div>
@@ -123,7 +123,7 @@ export default function SubmissionDetailPage({ params }: PageParams) {
     <div className="p-8 max-w-7xl">
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
-        <Link href="/admin/submissions" className="inline-flex items-center gap-2 text-white/35 hover:text-white/60 text-sm transition-colors mb-4 group">
+        <Link href="/admin/submissions" className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-600 text-sm transition-colors mb-4 group">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
           All Submissions
         </Link>
@@ -131,7 +131,7 @@ export default function SubmissionDetailPage({ params }: PageParams) {
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
             <h1 className="text-2xl font-bold">{submission.title}</h1>
-            <div className="flex items-center gap-4 mt-2 text-sm text-white/40 flex-wrap">
+            <div className="flex items-center gap-4 mt-2 text-sm text-gray-500 flex-wrap">
               <span className="flex items-center gap-1.5"><User className="w-3.5 h-3.5" />{submission.student_name}</span>
               <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{formatRelativeTime(submission.created_at)}</span>
               <span className="flex items-center gap-1.5"><FileText className="w-3.5 h-3.5" />{formatBytes(submission.file_size)}</span>
@@ -151,15 +151,15 @@ export default function SubmissionDetailPage({ params }: PageParams) {
         </div>
 
         {submission.notes && (
-          <div className="mt-4 p-4 rounded-xl border border-white/8 bg-white/[0.02] text-sm text-white/60 max-w-2xl">
-            <span className="text-white/30 text-xs uppercase font-medium tracking-wider block mb-1">Notes from student</span>
+          <div className="mt-4 p-4 rounded-xl border border-gray-200 bg-white text-sm text-gray-600 max-w-2xl">
+            <span className="text-gray-400 text-xs uppercase font-medium tracking-wider block mb-1">Notes from student</span>
             {submission.notes}
           </div>
         )}
       </motion.div>
 
       {/* Tabs */}
-      <div className="flex gap-1 p-1 rounded-lg bg-white/[0.04] border border-white/8 w-fit mb-6">
+      <div className="flex gap-1 p-1 rounded-lg bg-gray-100 border border-gray-200 w-fit mb-6">
         {[
           { key: 'notebook', label: 'Notebook', icon: FileText },
           { key: 'review', label: `Reviews ${reviews.length > 0 ? `(${reviews.length})` : ''}`, icon: MessageSquare },
@@ -170,7 +170,7 @@ export default function SubmissionDetailPage({ params }: PageParams) {
               key={t.key}
               onClick={() => setTab(t.key as typeof tab)}
               className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                tab === t.key ? 'bg-violet-600 text-white shadow-sm' : 'text-white/50 hover:text-white'
+                tab === t.key ? 'bg-[#BF2026] text-white shadow-sm' : 'text-gray-500 hover:text-[#333333]'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -184,16 +184,16 @@ export default function SubmissionDetailPage({ params }: PageParams) {
         {tab === 'notebook' ? (
           <motion.div key="notebook" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             {notebookLoading ? (
-              <div className="flex flex-col items-center justify-center py-24 text-white/30">
+              <div className="flex flex-col items-center justify-center py-24 text-gray-400">
                 <Loader2 className="w-8 h-8 animate-spin mb-4" />
                 <p className="text-sm">Loading notebook...</p>
               </div>
             ) : notebookContent ? (
-              <div className="rounded-xl border border-white/8 overflow-hidden bg-[#0d0d0d] p-6">
+              <div className="rounded-xl border border-gray-200 overflow-hidden bg-[#0d0d0d] p-6">
                 <NotebookViewer content={notebookContent} />
               </div>
             ) : (
-              <div className="text-center py-16 text-white/30 border border-white/8 rounded-xl">
+              <div className="text-center py-16 text-gray-400 border border-gray-200 rounded-xl">
                 <FileText className="w-10 h-10 mx-auto mb-3 opacity-40" />
                 <p>Could not load notebook content.</p>
                 <Button variant="outline" className="mt-4 gap-2" onClick={handleDownload}>
@@ -208,10 +208,10 @@ export default function SubmissionDetailPage({ params }: PageParams) {
               {/* Review Form */}
               <div>
                 <h2 className="font-semibold mb-4 flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-violet-400" />
+                  <CheckCircle className="w-4 h-4 text-red-400" />
                   Add Review
                 </h2>
-                <form onSubmit={handleReview} className="space-y-4 rounded-xl border border-white/8 bg-white/[0.02] p-5">
+                <form onSubmit={handleReview} className="space-y-4 rounded-xl border border-gray-200 bg-white p-5">
                   <div className="space-y-2">
                     <Label>Status</Label>
                     <Select value={reviewForm.status} onValueChange={v => setReviewForm(f => ({ ...f, status: v }))}>
@@ -248,11 +248,11 @@ export default function SubmissionDetailPage({ params }: PageParams) {
               {/* Review History */}
               <div>
                 <h2 className="font-semibold mb-4 flex items-center gap-2">
-                  <MessageSquare className="w-4 h-4 text-violet-400" />
+                  <MessageSquare className="w-4 h-4 text-red-400" />
                   Review History
                 </h2>
                 {reviews.length === 0 ? (
-                  <div className="text-center py-12 text-white/25 border border-white/8 rounded-xl text-sm">
+                  <div className="text-center py-12 text-gray-400 border border-gray-200 rounded-xl text-sm">
                     No reviews yet
                   </div>
                 ) : (
@@ -263,15 +263,15 @@ export default function SubmissionDetailPage({ params }: PageParams) {
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.06 }}
-                        className="p-4 rounded-xl border border-white/8 bg-white/[0.02]"
+                        className="p-4 rounded-xl border border-gray-200 bg-white"
                       >
                         <div className="flex items-center justify-between mb-3">
                           <span className={`text-[11px] px-2 py-1 rounded-md border font-medium ${statusBadge[review.status]}`}>
                             {STATUS_OPTIONS.find(s => s.value === review.status)?.label}
                           </span>
-                          <span className="text-xs text-white/25">{formatRelativeTime(review.created_at)}</span>
+                          <span className="text-xs text-gray-400">{formatRelativeTime(review.created_at)}</span>
                         </div>
-                        <p className="text-sm text-white/65 leading-relaxed">{review.comment}</p>
+                        <p className="text-sm text-gray-600 leading-relaxed">{review.comment}</p>
                       </motion.div>
                     ))}
                   </div>

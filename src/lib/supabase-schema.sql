@@ -10,6 +10,9 @@ create table if not exists datasets (
   file_path text not null,
   file_size bigint not null default 0,
   file_name text not null,
+  tags text[] default array[]::text[],
+  visibility text not null default 'public' check (visibility in ('public', 'private')),
+  downloads integer not null default 0,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

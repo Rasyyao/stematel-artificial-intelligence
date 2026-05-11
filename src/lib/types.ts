@@ -6,6 +6,9 @@ export type Dataset = {
   file_path: string
   file_size: number
   file_name: string
+  tags?: string[]
+  visibility?: 'public' | 'private'
+  downloads?: number
   created_at: string
   updated_at: string
 }

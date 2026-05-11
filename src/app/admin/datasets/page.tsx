@@ -116,7 +116,7 @@ export default function AdminDatasetsPage() {
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold">Datasets</h1>
-          <p className="text-white/40 text-sm mt-1">{datasets.length} datasets uploaded</p>
+          <p className="text-gray-500 text-sm mt-1">{datasets.length} datasets uploaded</p>
         </div>
         <Button onClick={() => setShowForm(!showForm)} className="gap-2">
           {showForm ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
@@ -133,8 +133,8 @@ export default function AdminDatasetsPage() {
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden mb-8"
           >
-            <form onSubmit={handleUpload} className="rounded-xl border border-violet-500/20 bg-violet-500/5 p-6 space-y-5">
-              <h2 className="font-semibold text-violet-300 flex items-center gap-2">
+            <form onSubmit={handleUpload} className="rounded-xl border border-[#BF2026]/20 bg-[#BF2026]/5 p-6 space-y-5">
+              <h2 className="font-semibold text-[#BF2026] flex items-center gap-2">
                 <Upload className="w-4 h-4" /> Upload New Dataset
               </h2>
 
@@ -148,9 +148,9 @@ export default function AdminDatasetsPage() {
                   <select
                     value={form.category}
                     onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
-                    className="w-full h-10 rounded-lg border border-white/10 bg-white/5 px-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                    className="w-full h-10 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#BF2026]/30"
                   >
-                    {CATEGORIES.map(c => <option key={c} value={c} className="bg-[#111]">{c}</option>)}
+                    {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div className="sm:col-span-2 space-y-2">
@@ -163,7 +163,7 @@ export default function AdminDatasetsPage() {
               <div
                 {...getRootProps()}
                 className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${
-                  isDragActive ? 'border-violet-500 bg-violet-500/5' : file ? 'border-green-500/40 bg-green-500/5' : 'border-white/10 hover:border-white/20'
+                  isDragActive ? 'border-[#BF2026] bg-[#BF2026]/5' : file ? 'border-green-500/40 bg-green-50' : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
                 <input {...getInputProps()} />
@@ -172,28 +172,28 @@ export default function AdminDatasetsPage() {
                     <Database className="w-5 h-5 text-green-400" />
                     <div className="text-left">
                       <div className="text-sm font-medium text-green-400 max-w-xs truncate">{file.name}</div>
-                      <div className="text-xs text-white/35">{formatBytes(file.size)}</div>
+                      <div className="text-xs text-gray-400">{formatBytes(file.size)}</div>
                     </div>
-                    <button type="button" onClick={e => { e.stopPropagation(); setFile(null) }} className="p-1 hover:bg-white/10 rounded text-white/40">
+                    <button type="button" onClick={e => { e.stopPropagation(); setFile(null) }} className="p-1 hover:bg-gray-100 rounded text-gray-500">
                       <X className="w-4 h-4" />
                     </button>
                   </div>
                 ) : (
                   <div>
-                    <Upload className="w-7 h-7 mx-auto mb-2 text-white/20" />
-                    <p className="text-sm text-white/40">Drop file here or click to browse</p>
-                    <p className="text-xs text-white/20 mt-1">Supports any file format, up to 100MB+</p>
+                    <Upload className="w-7 h-7 mx-auto mb-2 text-gray-300" />
+                    <p className="text-sm text-gray-500">Drop file here or click to browse</p>
+                    <p className="text-xs text-gray-400 mt-1">Supports any file format, up to 100MB+</p>
                   </div>
                 )}
               </div>
 
               {uploading && (
                 <div className="space-y-1.5">
-                  <div className="flex justify-between text-xs text-white/40">
+                  <div className="flex justify-between text-xs text-gray-500">
                     <span>Uploading...</span><span>{uploadProgress}%</span>
                   </div>
-                  <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full bg-violet-600 rounded-full transition-all duration-300" style={{ width: `${uploadProgress}%` }} />
+                  <div className="h-1.5 bg-gray-50 rounded-full overflow-hidden">
+                    <div className="h-full bg-red-600 rounded-full transition-all duration-300" style={{ width: `${uploadProgress}%` }} />
                   </div>
                 </div>
               )}
@@ -210,10 +210,10 @@ export default function AdminDatasetsPage() {
       {/* Dataset List */}
       {loading ? (
         <div className="space-y-3">
-          {[...Array(4)].map((_, i) => <div key={i} className="h-20 rounded-xl bg-white/[0.03] animate-pulse" />)}
+          {[...Array(4)].map((_, i) => <div key={i} className="h-20 rounded-xl bg-gray-50 animate-pulse" />)}
         </div>
       ) : datasets.length === 0 ? (
-        <div className="text-center py-20 text-white/25 border border-white/8 rounded-xl">
+        <div className="text-center py-20 text-gray-400 border border-gray-200 rounded-xl">
           <Database className="w-12 h-12 mx-auto mb-4 opacity-40" />
           <p>No datasets yet. Upload your first one.</p>
         </div>
@@ -225,21 +225,21 @@ export default function AdminDatasetsPage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="flex items-center gap-4 p-4 rounded-xl border border-white/8 bg-white/[0.02] hover:border-white/12 transition-all group"
+              className="flex items-center gap-4 p-4 rounded-xl border border-gray-200 bg-white hover:border-gray-200 transition-all group"
             >
-              <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/15 flex items-center justify-center flex-shrink-0">
-                <Database className="w-5 h-5 text-violet-400" />
+              <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/15 flex items-center justify-center flex-shrink-0">
+                <Database className="w-5 h-5 text-red-400" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="font-medium text-sm truncate">{d.title}</div>
-                <div className="text-xs text-white/35 mt-0.5 flex items-center gap-2">
-                  <span className="px-1.5 py-0.5 rounded bg-white/5 text-white/40">{d.category}</span>
+                <div className="text-xs text-gray-400 mt-0.5 flex items-center gap-2">
+                  <span className="px-1.5 py-0.5 rounded bg-gray-50 text-gray-500">{d.category}</span>
                   <span>·</span>
                   <span>{formatBytes(d.file_size)}</span>
                   <span>·</span>
                   <span>{formatDate(d.created_at)}</span>
                 </div>
-                {d.description && <div className="text-xs text-white/25 mt-1 truncate">{d.description}</div>}
+                {d.description && <div className="text-xs text-gray-400 mt-1 truncate">{d.description}</div>}
               </div>
               <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <Button size="sm" variant="outline" onClick={() => handleDownload(d)} className="gap-1.5 text-xs h-8">

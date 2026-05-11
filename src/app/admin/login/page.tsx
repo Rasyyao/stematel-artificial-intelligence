@@ -38,29 +38,29 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center px-4">
       <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-violet-600/8 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-red-600/8 rounded-full blur-[120px] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         className="relative w-full max-w-sm"
       >
-        <div className="glass rounded-2xl p-8 border border-white/8 shadow-2xl">
+        <div className="glass rounded-2xl p-8 border border-gray-200 shadow-2xl">
           <div className="text-center mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-violet-600 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-violet-500/30">
+            <div className="w-14 h-14 rounded-2xl bg-red-600 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-red-500/30">
               <Zap className="w-7 h-7 text-white" />
             </div>
             <h1 className="text-xl font-bold">Admin Panel</h1>
-            <p className="text-sm text-white/35 mt-1">LKS Nasional AI Tracker</p>
+            <p className="text-sm text-gray-400 mt-1">LKS Nasional AI Tracker</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <Input
                   id="password"
                   type="password"

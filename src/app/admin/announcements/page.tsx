@@ -71,7 +71,7 @@ export default function AnnouncementsPage() {
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold">Announcements</h1>
-          <p className="text-white/40 text-sm mt-1">{announcements.length} announcements</p>
+          <p className="text-gray-500 text-sm mt-1">{announcements.length} announcements</p>
         </div>
         <Button onClick={() => setShowForm(!showForm)} className="gap-2">
           {showForm ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
@@ -87,8 +87,8 @@ export default function AnnouncementsPage() {
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden mb-8"
           >
-            <form onSubmit={handleCreate} className="rounded-xl border border-violet-500/20 bg-violet-500/5 p-6 space-y-4">
-              <h2 className="font-semibold text-violet-300 flex items-center gap-2">
+            <form onSubmit={handleCreate} className="rounded-xl border border-[#BF2026]/20 bg-[#BF2026]/5 p-6 space-y-4">
+              <h2 className="font-semibold text-[#BF2026] flex items-center gap-2">
                 <Megaphone className="w-4 h-4" /> Post Announcement
               </h2>
 
@@ -105,11 +105,11 @@ export default function AnnouncementsPage() {
               <label className="flex items-center gap-3 cursor-pointer group">
                 <div
                   onClick={() => setForm(f => ({ ...f, pinned: !f.pinned }))}
-                  className={`w-10 h-6 rounded-full transition-colors ${form.pinned ? 'bg-violet-600' : 'bg-white/10'} relative`}
+                  className={`w-10 h-6 rounded-full transition-colors ${form.pinned ? 'bg-red-600' : 'bg-gray-100'} relative`}
                 >
                   <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${form.pinned ? 'left-5' : 'left-1'}`} />
                 </div>
-                <span className="text-sm text-white/60 group-hover:text-white/80 transition-colors flex items-center gap-1.5">
+                <span className="text-sm text-gray-500 group-hover:text-gray-700 transition-colors flex items-center gap-1.5">
                   <Pin className="w-3.5 h-3.5" /> Pin to top of landing page
                 </span>
               </label>
@@ -124,10 +124,10 @@ export default function AnnouncementsPage() {
 
       {loading ? (
         <div className="space-y-3">
-          {[...Array(3)].map((_, i) => <div key={i} className="h-20 rounded-xl bg-white/[0.03] animate-pulse" />)}
+          {[...Array(3)].map((_, i) => <div key={i} className="h-20 rounded-xl bg-gray-50 animate-pulse" />)}
         </div>
       ) : announcements.length === 0 ? (
-        <div className="text-center py-20 text-white/25 border border-white/8 rounded-xl">
+        <div className="text-center py-20 text-gray-400 border border-gray-200 rounded-xl">
           <Megaphone className="w-12 h-12 mx-auto mb-4 opacity-40" />
           <p>No announcements yet.</p>
         </div>
@@ -139,22 +139,22 @@ export default function AnnouncementsPage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.06 }}
-              className={`flex items-start gap-4 p-5 rounded-xl border transition-all group ${ann.pinned ? 'border-violet-500/30 bg-violet-500/5' : 'border-white/8 bg-white/[0.02] hover:border-white/12'}`}
+              className={`flex items-start gap-4 p-5 rounded-xl border transition-all group ${ann.pinned ? 'border-red-500/30 bg-red-500/5' : 'border-gray-200 bg-white hover:border-gray-200'}`}
             >
-              <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${ann.pinned ? 'bg-violet-500/15 border border-violet-500/20' : 'bg-white/5 border border-white/8'}`}>
-                {ann.pinned ? <Pin className="w-4 h-4 text-violet-400" /> : <Megaphone className="w-4 h-4 text-white/40" />}
+              <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${ann.pinned ? 'bg-red-500/15 border border-red-500/20' : 'bg-gray-50 border border-gray-200'}`}>
+                {ann.pinned ? <Pin className="w-4 h-4 text-red-400" /> : <Megaphone className="w-4 h-4 text-gray-500" />}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="font-medium text-sm">{ann.title}</span>
-                  {ann.pinned && <span className="text-[10px] px-1.5 py-0.5 rounded bg-violet-500/20 text-violet-400 font-semibold tracking-wider">PINNED</span>}
+                  {ann.pinned && <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 font-semibold tracking-wider">PINNED</span>}
                 </div>
-                <p className="text-sm text-white/50 leading-relaxed">{ann.content}</p>
-                <span className="text-xs text-white/25 mt-2 block">{formatDate(ann.created_at)}</span>
+                <p className="text-sm text-gray-500 leading-relaxed">{ann.content}</p>
+                <span className="text-xs text-gray-400 mt-2 block">{formatDate(ann.created_at)}</span>
               </div>
               <button
                 onClick={() => handleDelete(ann.id)}
-                className="p-2 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-red-500/10 text-white/25 hover:text-red-400 transition-all"
+                className="p-2 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-red-500/10 text-gray-400 hover:text-red-400 transition-all"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
